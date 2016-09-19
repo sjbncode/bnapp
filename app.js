@@ -8,11 +8,12 @@ var bodyParser = require('body-parser');
 //routes
 var api_route=require('./app_api/routes/index');
 var server_route=require('./app_server/routes/index');
+var admin_route=require('./app_server/routes/admin');
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'app_server','views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
@@ -22,8 +23,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'app_client')));
+//app.use(express.static(path.join(__dirname, 'app_admin')));
 
 app.use('/', server_route);
+app.use('/admin', admin_route);
 app.use('/api', api_route);
 
 // catch 404 and forward to error handler

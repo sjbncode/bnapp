@@ -1,4 +1,4 @@
 /* GET Angular SPA page */
-module.exports.test = function(req, res){
-  res.render('layout', { title: 'xxxLoc8r' });
+module.exports.angularApp = function(req, res){
+  res.render('layout_admin', { title: 'xxxLoc8r' });
 };

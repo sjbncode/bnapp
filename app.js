@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //app.use(express.static(path.join(__dirname, 'app_client')));
-//app.use(express.static(path.join(__dirname, 'app_admin')));
+app.use(express.static(path.join(__dirname, 'app_admin')));
 
 app.use('/', server_route);
 app.use('/admin', admin_route);

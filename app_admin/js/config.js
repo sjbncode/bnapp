@@ -1374,7 +1374,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             data: { pageTitle: 'Off canvas menu', specialClass: 'canvas-menu' }
         });
 
-    $urlRouterProvider.html5Mode(true)
 }
 angular
     .module('inspinia')

@@ -11,7 +11,8 @@ var server_route=require('./app_server/routes/index');
 var admin_route=require('./app_server/routes/admin');
 
 var app = express();
-
+//disable 
+app.set('etag', false); 
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server','views'));
 app.set('view engine', 'jade');

@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var uglifyJs = require("uglify-js");
+var fs = require('fs');
 
 //routes
 var api_route=require('./app_api/routes/index');
@@ -17,6 +19,26 @@ app.set('etag', false);
 app.set('views', path.join(__dirname, 'app_server','views'));
 app.set('view engine', 'jade');
 
+
+var appClientFiles = [
+  'app_admin2/adminApp.js',
+  'app_admin2/about/about.js',
+];
+var uglified = uglifyJs.minify(appClientFiles, { compress : false });
+
+fs.writeFile('app_admin2/adminApp.min.js', uglified.code, function (err){
+  if(err) {
+    console.log(err);
+  } else {
+    console.log("Script generated and saved:", 'adminApp.min.js');
+  }
+});
+
+
+
+
+
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -24,8 +46,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use(express.static(path.join(__dirname, 'app_client')));
 app.use(express.static(path.join(__dirname, 'app_admin')));
+app.use(express.static(path.join(__dirname, 'app_admin2')));
 
 app.use('/', server_route);
 app.use('/admin', admin_route);

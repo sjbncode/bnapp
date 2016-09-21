@@ -1,5 +1,14 @@
 (function() {
-	angular.module('adminApp', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
+	angular.module('adminApp', 
+		['ui.router',                    // Routing
+        'oc.lazyLoad',                  // ocLazyLoad
+        'ui.bootstrap',                 // Ui Bootstrap
+        'pascalprecht.translate',       // Angular Translate
+        'ngIdle',                       // Idle timer
+        'ngSanitize'                    // ngSanitize
+        ]
+		//['ngRoute', 'ngSanitize', 'ui.bootstrap']
+		);
 
 	function config($routeProvider, $locationProvider) {
 		$routeProvider
@@ -9,7 +18,7 @@
 				controller: 'aboutCtrl',
 				controllerAs: 'vm'
 			})
-			.when('/login', {})
+			//.when('/login', {})
 			.otherwise({
 				rederiteTo: ''
 			});

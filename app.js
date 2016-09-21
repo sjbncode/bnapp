@@ -22,7 +22,13 @@ app.set('view engine', 'jade');
 
 var appClientFiles = [
   'app_admin2/adminApp.js',
-  'app_admin2/about/about.js',
+  //'app_admin2/about/about.js',
+  //'app_admin2/common/services/authentication.s.js',
+  //'app_admin2/common/directives/footerGeneric/footerGeneric.d.js',
+  //'app_admin2/common/directives/navigation/navigation.js',
+  //'app_admin2/common/directives/navigation/navigation.d.js',
+  //'app_admin2/common/directives/pageHeader/pageHeader.js',
+  //'app_admin2/common/directives/pageHeader/pageHeader.d.js',
 ];
 var uglified = uglifyJs.minify(appClientFiles, { compress : false });
 

@@ -3,11 +3,11 @@
   angular
     .module('adminApp')
     .service('authentication', authentication);
-  var token_key = 'bnapp-token';
   authentication.$inject = ['$http', '$window'];
 
   function authentication($http, $window) {
 
+    var token_key = 'bnapp-token';
     var saveToken = function(token) {
       $window.localStorage[token_key] = token;
     };

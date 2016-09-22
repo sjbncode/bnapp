@@ -23,6 +23,8 @@ app.set('view engine', 'jade');
 var appClientFiles = [
   // 'app_admin2/adminApp.js',
   'app_admin2/about/about.js',
+  'app_admin2/common/controllers.js',
+  'app_admin2/common/translations.js',
   'app_admin2/common/services/authentication.s.js',
   'app_admin2/common/directives/footerGeneric/footerGeneric.d.js',
   'app_admin2/common/directives/navigation/navigation.js',

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html ng-app="adminApp">
 <head>
 	<meta charset="utf-8">
@@ -18,13 +18,11 @@
     <link href="css/animate.css" rel="stylesheet">
     <link id="loadBefore" href="css/style.css" rel="stylesheet">
 </head>
-<body>
+<body ng-controller="MainCtrl as main" class="{{$state.current.data.specialClass}}">
 <!-- Main view  -->
-<!-- <div ui-view></div> -->
 <div id="wrapper">
-<div ng-include="'common/directives/navigation/navigation.html'"></div>
-<div id="page-wrapper" class="gray-bg" style="min-height:600px"><div ng-view></div>
-</div>
+<!-- <div ng-view></div> -->
+<div ui-view></div>
 
 </div>
 <!-- jQuery and Bootstrap -->
@@ -55,7 +53,7 @@
 <script src="js/plugins/angular-idle/angular-idle.js"></script>
 
 <!-- Anglar App Script -->
-<script src="adminApp.js"></script>
+<!-- <script src="adminApp.js"></script> -->
 <script src="adminApp.min.js"></script>
 
 </body>

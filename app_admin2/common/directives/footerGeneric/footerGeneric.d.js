@@ -2,7 +2,7 @@
 
   angular
     .module('adminApp')
-    .directive('footerGeneric', footerGeneric);
+    .directive('footergeneric', footerGeneric);
 
   function footerGeneric () {
     return {

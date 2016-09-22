@@ -1,7 +1,7 @@
 (function() {
   angular
     .module('adminApp')
-    .directive('pageHeader', pageHeader);
+    .directive('pageheader', pageHeader);
 
   function pageHeader() {
     return {

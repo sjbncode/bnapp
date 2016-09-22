@@ -4,7 +4,7 @@
     .controller('translateCtrl', translateCtrl);
 
     translateCtrl.$inject=['$translate','$scope'];
-    function translateCtrl($scope) {
+    function translateCtrl($translate,$scope) {
     $scope.changeLanguage = function (langKey) {
         $translate.use(langKey);
         $scope.language = langKey;
@@ -14,9 +14,7 @@
 
 
 (function(){
-	angular
-    .module('adminApp')
-    .controller('translateCtrl', translateCtrl);
+
 
     
 
@@ -3312,7 +3310,7 @@ angular
     .module('adminApp')
     .controller('MainCtrl', MainCtrl)
     .controller('dashboardFlotOne', dashboardFlotOne)
-    // .controller('dashboardFlotTwo', dashboardFlotTwo)
+    .controller('dashboardFlotTwo', dashboardFlotTwo)
     // .controller('dashboardFive', dashboardFive)
     // .controller('dashboardMap', dashboardMap)
     // .controller('flotChartCtrl', flotChartCtrl)

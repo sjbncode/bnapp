@@ -8,24 +8,60 @@
 		'ngSanitize' // ngSanitize
 	]);
 
-	function config($stateProvider, $urlRouterProvider,$ocLazyLoadProvider, $locationProvider,IdleProvider) {
+	function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider, IdleProvider) {
 
 		// Configure Idle settings
-	    IdleProvider.idle(5); // in seconds
-	    IdleProvider.timeout(120); // in seconds
+		IdleProvider.idle(5); // in seconds
+		IdleProvider.timeout(120); // in seconds
 
 		$ocLazyLoadProvider.config({
 			// Set to true if you want to see what and when is dynamically loaded
 			debug: true
 		});
-		$urlRouterProvider.otherwise("/dashboards/dashboard_1");
+		$urlRouterProvider.otherwise("/dashboards/dashboard_2");
 		$stateProvider
+			.state('login', {
+				url: "/login",
+				templateUrl: "auth/login/login.html",
+				data: {
+					pageTitle: 'Login',
+					specialClass: 'gray-bg'
+				}
+			}).state('register', {
+				url: "/register",
+				templateUrl: "auth/register/register.html",
+				data: {
+					pageTitle: 'Login',
+					specialClass: 'gray-bg'
+				}
+			})
 			.state('dashboards', {
 				abstract: true,
 				url: "/dashboards",
 				templateUrl: "common/views/layout.html",
 			})
-			.state('dashboards.dashboard_1', {
+
+		.state('dashboards.monitor', {
+			url: "/monitor",
+			templateUrl: "monitor/monitordashboard.html",
+			resolve: {
+				loadPlugin: function($ocLazyLoad) {
+					return $ocLazyLoad.load([{
+						serie: true,
+						name: 'angular-flot',
+						files: ['js/plugins/flot/jquery.flot.js', 'js/plugins/flot/jquery.flot.time.js', 'js/plugins/flot/jquery.flot.tooltip.min.js', 'js/plugins/flot/jquery.flot.spline.js', 'js/plugins/flot/jquery.flot.resize.js', 'js/plugins/flot/jquery.flot.pie.js', 'js/plugins/flot/curvedLines.js', 'js/plugins/flot/angular-flot.js', ]
+					}, {
+						name: 'angles',
+						files: ['js/plugins/chartJs/angles.js', 'js/plugins/chartJs/Chart.min.js']
+					}, {
+						name: 'angular-peity',
+						files: ['js/plugins/peity/jquery.peity.min.js', 'js/plugins/peity/angular-peity.js']
+					}]);
+				}
+			}
+		})
+
+		.state('dashboards.dashboard_1', {
 				url: "/dashboard_1",
 				templateUrl: "views/dashboard_1.html",
 				resolve: {
@@ -172,8 +208,8 @@
 	}
 
 	angular.module('adminApp')
-		.config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider','$locationProvider','IdleProvider', config])
+		.config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$locationProvider', 'IdleProvider', config])
 		.run(function($rootScope, $state) {
-        $rootScope.$state = $state;
-    });
+			$rootScope.$state = $state;
+		});
 })();

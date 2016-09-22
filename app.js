@@ -31,6 +31,7 @@ var appClientFiles = [
   'app_admin2/common/directives/navigation/navigation.d.js',
   'app_admin2/common/directives/pageHeader/pageHeader.js',
   'app_admin2/common/directives/pageHeader/pageHeader.d.js',
+  'app_admin2/common/directives/pageTitle/pageTitle.d.js',
 ];
 var uglified = uglifyJs.minify(appClientFiles, { compress : false });
 

@@ -19,7 +19,6 @@
     
 
     function MainCtrl() {
-
     /**
      * daterange - Used as initial model for data range picker in Advanced form view
      */

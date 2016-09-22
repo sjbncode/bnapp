@@ -40,7 +40,6 @@
 				url: "/dashboards",
 				templateUrl: "common/views/layout.html",
 			})
-
 		.state('dashboards.monitor', {
 			url: "/monitor",
 			templateUrl: "monitor/monitordashboard.html",

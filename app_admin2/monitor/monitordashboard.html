@@ -1,41 +1,20 @@
 <div class="row  border-bottom white-bg dashboard-header">
-    <div class="col-sm-3">
+    <div class="col-sm-6">
         <h2>{{ 'WELCOME' | translate }}</h2>
         <small>{{ 'MESSAGEINFO' | translate }}</small>
-        <ul class="list-group clear-list m-t">
-            <li class="list-group-item fist-item">
-                                <span class="pull-right">
-                                    09:00 pm
-                                </span>
-                <span class="label label-success">1</span> Please contact me
-            </li>
-            <li class="list-group-item">
-                                <span class="pull-right">
-                                    10:16 am
-                                </span>
-                <span class="label label-info">2</span> Sign a contract
-            </li>
-            <li class="list-group-item">
-                                <span class="pull-right">
-                                    08:22 pm
-                                </span>
-                <span class="label label-primary">3</span> Open new shop
-            </li>
-            <li class="list-group-item">
-                                <span class="pull-right">
-                                    11:06 pm
-                                </span>
-                <span class="label label-default">4</span> Call back to Sylvia
-            </li>
-            <li class="list-group-item">
-                                <span class="pull-right">
-                                    12:00 am
-                                </span>
-                <span class="label label-primary">5</span> Write a letter to Sandra
-            </li>
+        <ul class="list-group clear-list m-t" ng-controller="monitordashboard">
+            <li class="list-group-item" ng-repeat="x in synclog">
+                <span>{{x.dataName}}</span>
+                <span class="label label-success">{{x.success}}</span>
+                <span class="label label-default">{{x.noneedupload}}</span>
+                <span class="label label-warning">{{x.new}}</span>
+                <span class="label label-primary">{{x.inqueue}}</span>
+                <span class="label label-primary">{{x.processing}}</span>
+                <span class="label label-danger">{{x.exception}}</span>
+            </li>           
         </ul>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-3">
         <div class="flot-chart dashboard-chart" ng-controller="dashboardFlotOne as chart">
             <div flot class="flot-chart-content" dataset="chart.flotData" options="chart.flotOptions"></div>
         </div>

@@ -28,7 +28,7 @@ function select(sqlscript, cb) {
 		} else {
 			var txt = toJson(results, 'data');
 			var jsonObj = eval("(" + txt + ")");
-			console.log(jsonObj);
+			//console.log(jsonObj);
 			cb(jsonObj);
 		}
 	});

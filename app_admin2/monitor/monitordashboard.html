@@ -4,13 +4,14 @@
         <small>{{ 'MESSAGEINFO' | translate }}</small>
         <ul class="list-group clear-list m-t" ng-controller="monitordashboard">
             <li class="list-group-item" ng-repeat="x in synclog">
-                <span>{{x.dataName}}</span>
-                <span class="label label-success">{{x.success}}</span>
-                <span class="label label-default">{{x.noneedupload}}</span>
-                <span class="label label-warning">{{x.new}}</span>
-                <span class="label label-primary">{{x.inqueue}}</span>
-                <span class="label label-primary">{{x.processing}}</span>
-                <span class="label label-danger">{{x.exception}}</span>
+                <span style="width:200px;display: inline-block" class="pull-left">{{x.dataName}}</span>
+                <span style="width:50px;display: inline-block" class="label label-success pull-right">{{x.UpdateSuccess}}</span>
+                <span style="width:30px;display: inline-block" class="label label-default pull-right">{{x.NoNeedUpload=='null'?0:x.NoNeedUpload}}</span>
+                <span style="width:30px;display: inline-block" class="label label-warning pull-right">{{x.New=='null'?0:x.New}}</span>
+                <span style="width:30px;display: inline-block" class="label label-primary pull-right">{{x.Inqueue=='null'?0:x.Inqueue}}</span>
+                <span style="width:30px;display: inline-block" class="label label-primary pull-right">{{x.Processing=='null'?0:x.Processing}}</span>
+                <span style="width:30px;display: inline-block" class="label label-danger pull-right">{{x.Exception=='null'?0:x.Exception}}</span>
+                <span>|</span>
             </li>           
         </ul>
     </div>

@@ -1,16 +1,18 @@
 // monitordashboard
 (function() {
 	angular.module('adminApp')
-		.controller('monitordashboard', ['$scope', '$interval', function($scope, $interval) {
-			$scope.synclog = [{dataName:'xxx',success:100,noneedupload:200,new:20,inqueue:10,processing:30,exception:10}
-			,{dataName:'xxx',success:100,noneedupload:200,new:20,inqueue:10,processing:30,exception:10}
-			,{dataName:'xxx',success:100,noneedupload:200,new:20,inqueue:10,processing:30,exception:10}
-			,{dataName:'xxx',success:100,noneedupload:200,new:20,inqueue:10,processing:30,exception:10}
-			,{dataName:'xxx',success:100,noneedupload:200,new:20,inqueue:10,processing:30,exception:10}
-			];
+		.controller('monitordashboard', ['$scope', '$interval','$http', function($scope, $interval,$http) {
+			$scope.synclog = [];
 			function getSyncLog(){
 				//$scope.synclog.total += 1;
+				 $http.get('/api/synclog/').then(function(result){
+
+				 	$scope.synclog=[];
+				 	result.data.data.forEach(function(x){
+				 		$scope.synclog.push(x);
+				 	})
+				 });
 			}
-			$interval(getSyncLog, 100);
+			$interval(getSyncLog, 5000);
 		}])
 })();

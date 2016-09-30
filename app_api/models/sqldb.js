@@ -26,10 +26,7 @@ function select(sqlscript, cb) {
 			console.log(err);
 			cb({error:err});
 		} else {
-			var txt = toJson(results, 'data');
-			var jsonObj = eval("(" + txt + ")");
-			//console.log(jsonObj);
-			cb(jsonObj);
+			cb({data:toJson(results)});
 		}
 	});
 }
@@ -48,31 +45,22 @@ function add(sqlscript) {
 
 //convert table to json  
 function toJson(dt, tbName) {
-	var jsonString;
+	var results=[];
 	if (dt != undefined && dt.rows.length > 0) {
 		var rowLen = dt.rows.length;
 		var colLen = dt.meta.length;
-		jsonString = "{";
-		jsonString += "\"" + tbName + "\":[";
 		for (var i = 0; i < rowLen; i++) {
-			jsonString += "{";
+			var r={};
 			for (var j = 0; j < colLen; j++) {
-				if (j < colLen - 1) {
-					jsonString += "\"" + dt.meta[j].name + "\":" + "\"" + dt.rows[i][j] + "\",";
-				} else if (j == colLen - 1) {
-					jsonString += "\"" + dt.meta[j].name + "\":" + "\"" + dt.rows[i][j] + "\"";
-				}
+				
+				var v=dt.rows[i][j];
+				var k=dt.meta[j].name;
+				r[k]=v;
 			}
-			if (i == rowLen - 1) {
-				jsonString += "}";
-			} else {
-				jsonString += "},";
-			}
+			results.push(r);			
 		}
-		jsonString += "]}";
-		return jsonString;
 	}
-	return jsonString;
+	return results;
 }
 
 exports.add = add;

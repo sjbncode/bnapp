@@ -1,18 +1,48 @@
 // monitordashboard
 (function() {
 	angular.module('adminApp')
-		.controller('monitordashboard', ['$scope', '$interval','$http', function($scope, $interval,$http) {
+		.controller('monitordashboard', ['$scope', '$interval', '$http','ngclipboard' function($scope, $interval, $http,ngClipboard) {
 			$scope.synclog = [];
-			function getSyncLog(){
-				//$scope.synclog.total += 1;
-				 $http.get('/api/synclog/').then(function(result){
+			$scope.syncErrors = [];
+			var promise;
+			$scope.start = function() {
+				$scope.stop();
+				promise = $interval(getSyncLog, 5000);
+			};
+			$scope.stop = function() {
+				$interval.cancel(promise);
+			};
+			$scope.$on('$destroy', function() {
+				$scope.stop();
+			});
 
-				 	$scope.synclog=[];
-				 	result.data.data.forEach(function(x){
-				 		$scope.synclog.push(x);
-				 	})
-				 });
+			function getSyncLog() {
+				//$scope.synclog.total += 1;
+				$http.get('/api/synclog/').then(function(result) {
+
+					$scope.synclog = [];
+					result.data.data.forEach(function(x) {
+						$scope.synclog.push(x);
+					})
+				});
+			};
+
+
+			$scope.getSyncErrors = function() {
+				$http.get('/api/syncErrors/').then(function(result) {
+					$scope.syncErrors = [];
+					result.data.data.forEach(function(x) {
+						$scope.syncErrors.push(x);
+					})
+				});
 			}
-			$interval(getSyncLog, 5000);
+			$scope.showhide = function() {
+
+			}
+			$scope.showErrorDetail = function(txt) {
+				 ngClipboard.toClipboard(txt);
+			}
+
+			$scope.start();
 		}])
 })();

@@ -6,6 +6,7 @@
 		'pascalprecht.translate', // Angular Translate
 		'ngIdle', // Idle timer
 		'ngSanitize' // ngSanitize
+		 ,'ngclipboard'
 	]);
 
 	function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider, IdleProvider) {
@@ -40,25 +41,33 @@
 				url: "/dashboards",
 				templateUrl: "common/views/layout.html",
 			})
-		.state('dashboards.monitor', {
-			url: "/monitor",
-			templateUrl: "monitor/monitordashboard.html",
-			resolve: {
-				loadPlugin: function($ocLazyLoad) {
-					return $ocLazyLoad.load([{
-						serie: true,
-						name: 'angular-flot',
-						files: ['js/plugins/flot/jquery.flot.js', 'js/plugins/flot/jquery.flot.time.js', 'js/plugins/flot/jquery.flot.tooltip.min.js', 'js/plugins/flot/jquery.flot.spline.js', 'js/plugins/flot/jquery.flot.resize.js', 'js/plugins/flot/jquery.flot.pie.js', 'js/plugins/flot/curvedLines.js', 'js/plugins/flot/angular-flot.js', ]
-					}, {
-						name: 'angles',
-						files: ['js/plugins/chartJs/angles.js', 'js/plugins/chartJs/Chart.min.js']
-					}, {
-						name: 'angular-peity',
-						files: ['js/plugins/peity/jquery.peity.min.js', 'js/plugins/peity/angular-peity.js']
-					}]);
+			.state('dashboards.monitor', {
+				url: "/monitor",
+				templateUrl: "monitor/monitordashboard.html",
+				resolve: {
+					loadPlugin: function($ocLazyLoad) {
+						return $ocLazyLoad.load([{
+							serie: true,
+							name: 'angular-flot',
+							files: ['js/plugins/flot/jquery.flot.js', 'js/plugins/flot/jquery.flot.time.js', 'js/plugins/flot/jquery.flot.tooltip.min.js', 'js/plugins/flot/jquery.flot.spline.js', 'js/plugins/flot/jquery.flot.resize.js', 'js/plugins/flot/jquery.flot.pie.js', 'js/plugins/flot/curvedLines.js', 'js/plugins/flot/angular-flot.js', ]
+						}, {
+							name: 'angles',
+							files: ['js/plugins/chartJs/angles.js', 'js/plugins/chartJs/Chart.min.js']
+						}, {
+							name: 'angular-peity',
+							files: ['js/plugins/peity/jquery.peity.min.js', 'js/plugins/peity/angular-peity.js']
+						}
+						// , {
+      //                       files: ['js/plugins/ngclipboard/clipboard.min.js']
+      //                   },
+      //                   {
+      //                       name: 'ngclipboard',
+      //                       files: ['js/plugins/ngclipboard/ngclipboard.min.js']
+      //                   }
+                        ]);
+					}
 				}
-			}
-		})
+			})
 
 		.state('dashboards.dashboard_1', {
 				url: "/dashboard_1",

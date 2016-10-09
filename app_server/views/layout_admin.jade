@@ -13,7 +13,7 @@ html(ng-app='adminApp')
     // Main Inspinia CSS files
     link(href='css/animate.css', rel='stylesheet')
     link#loadBefore(href='css/style.css', rel='stylesheet')
-  body(ng-controller='MainCtrl as main')
+  body.mini-navbar(ng-controller='MainCtrl as main')
     // Main view
     #wrapper
       // <div ng-view></div>
@@ -39,8 +39,8 @@ html(ng-app='adminApp')
     script(src='js/ui-router/angular-ui-router.min.JS')
     script(src='js/bootstrap/ui-bootstrap-tpls-1.1.2.min.js')
     script(src='js/plugins/angular-idle/angular-idle.js')
-    script(src='js/plugins/ngclipboard/clipboard.min.js')
-    script(src='js/plugins/ngclipboard/ngclipboard.min.js')
+    //- script(src='js/plugins/ngclipboard/clipboard.min.js')
+    //- script(src='js/plugins/ngclipboard/ngclipboard.min.js')
     // Anglar App Script
     script(src='adminApp.js')
     script(src='monitor/monitordashboard.js')

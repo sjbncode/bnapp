@@ -5,8 +5,8 @@
 		'ui.bootstrap', // Ui Bootstrap
 		'pascalprecht.translate', // Angular Translate
 		'ngIdle', // Idle timer
-		'ngSanitize' // ngSanitize
-		 ,'ngclipboard'
+		// 'ngSanitize' // ngSanitize
+		//  ,'ngclipboard'
 	]);
 
 	function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider, IdleProvider) {
@@ -57,13 +57,13 @@
 							name: 'angular-peity',
 							files: ['js/plugins/peity/jquery.peity.min.js', 'js/plugins/peity/angular-peity.js']
 						}
-						// , {
-      //                       files: ['js/plugins/ngclipboard/clipboard.min.js']
-      //                   },
-      //                   {
-      //                       name: 'ngclipboard',
-      //                       files: ['js/plugins/ngclipboard/ngclipboard.min.js']
-      //                   }
+						, {
+                            files: ['js/plugins/ngclipboard/clipboard.min.js']
+                        },
+                        {
+                            name: 'ngclipboard',
+                            files: ['js/plugins/ngclipboard/ngclipboard.min.js']
+                        }
                         ]);
 					}
 				}

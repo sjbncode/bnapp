@@ -5,19 +5,19 @@
             <small>{{ 'You have '+synclog_exception +' exception(s)' }}</small>
             <ul class="list-group clear-list m-t">
                 <li class="list-group-item" ng-repeat="x in synclog">
-                    <span style="width:200px;display: inline-block" class="pull-left {{x.Exception>0?'label-danger':''}}">{{x.dataName}}</span>
+                    <a ng-click="getSyncErrors(x.dataName)"><span style="width:200px;display: inline-block" class="pull-left {{x.Exception>0?'label-danger':''}}">{{x.dataName}}</span></a>
                     <span style="width:50px;display: inline-block" class="label label-success pull-right">{{x.UpdateSuccess}}</span>
                     <span style="width:30px;display: inline-block" class="label label-default pull-right">{{x.NoNeedUpload==null?0:x.NoNeedUpload}}</span>
                     <span style="width:30px;display: inline-block" class="label label-warning pull-right">{{x.New==null?0:x.New}}</span>
                     <span style="width:30px;display: inline-block" class="label label-primary pull-right">{{x.Inqueue==null?0:x.Inqueue}}</span>
                     <span style="width:30px;display: inline-block" class="label label-primary pull-right">{{x.Processing==null?0:x.Processing}}</span>
-                    <span style="width:30px;display: inline-block" class="label label-danger pull-right">{{x.Exception==null?0:x.Exception}}</span>
+                    <a ng-click="getSyncErrors(x.dataName)"><span style="width:30px;display: inline-block" class="label label-danger pull-right">{{x.Exception==null?0:x.Exception}}</span></a>
                     <span>&nbsp;</span>
                 </li>
             </ul>
         </div>
         <div class="col-sm-3">
-            <div class="flot-chart dashboard-chart" ng-controller="dashboardFlotOne as chart">
+            <!-- <div class="flot-chart dashboard-chart" ng-controller="dashboardFlotOne as chart">
                 <div flot class="flot-chart-content" dataset="chart.flotData" options="chart.flotOptions"></div>
             </div>
             <div class="row text-left">
@@ -36,7 +36,7 @@
                     <small class="text-muted m-b block">Half-year revenue margin</small>
                 </div>
 
-            </div>
+            </div> -->
         </div>
         <div class="col-sm-3">
             <div class="statistic-box">
@@ -91,11 +91,11 @@
                                         <a ng-click="sortBy('Destination')">Destination</a>
                                         <span class="sortorder" ng-show="propertyName === 'Destination'" ng-class="{reverse: reverse}"></span>
                                     </th>
-                                    <th>
+                                    <th style="width:200px">
                                         <a ng-click="sortBy('Key1')">Key1</a>
                                         <span class="sortorder" ng-show="propertyName === 'Key1'" ng-class="{reverse: reverse}"></span>
                                     </th>
-                                    <th style="width:100px">Result</th>
+                                    <th style="width:100%">Result</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -103,7 +103,8 @@
                                     <td >{{x.DataName}}</td>
                                     <td>{{x.Destination}}</td>
                                     <td>
-                                        <a popover-placement="left" uib-popover-template="'exceptionOtherInfo.html'" >{{x.Key1}}</a>
+                                        <a popover-placement="right" uib-popover-template="'exceptionOtherInfo.html'" >{{x.Key1}}</a>
+                                        <a class="btn btn-primary" ui-sref="dashboards.syncsolution({ID:x.ID})">Resolution</a>
                                     </td>
                                     <td>{{x.Result}}</td>
                                 </tr>
@@ -123,5 +124,7 @@
     <div><strong>Key3:</strong>{{ x.Key3 }}</div>
     <div><strong>CreatedBy:</strong>{{ x.CreatedBy }}</div>
     <div><strong>CreatedDttm:</strong>{{ x.CreatedDttm }}</div>
-    <div><strong>UpdatedDttm:</strong>{{ x.UpdatedDttm }}</div>
+    <div><strong>UpdatedDttm:</strong>{{ x.UpdatedDttm }}</div>    
+    <div ng-if="x.DataName=='ERPCustomerCN'"><a href="https://system.na2.netsuite.com/app/common/entity/custjob.nl?id={{x.Key1}}" target="_blank">Open In ERP</a></div>
+    <div><a ui-sref="dashboards.syncsolution({ID:x.ID})">Find Solution</a></div>
 </script>

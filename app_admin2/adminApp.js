@@ -68,6 +68,12 @@
 					}
 				}
 			})
+			.state('dashboards.syncsolution', {
+				url: "/syncsolution",
+				templateUrl: "monitor/syncsolution.html",
+				params:{"ID":null}
+				
+			})
 
 		.state('dashboards.dashboard_1', {
 				url: "/dashboard_1",
@@ -217,7 +223,10 @@
 
 	angular.module('adminApp')
 		.config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$locationProvider', 'IdleProvider', config])
-		.run(function($rootScope, $state) {
+		.run(function($rootScope, $state,$stateParams,$window) {
 			$rootScope.$state = $state;
+			$rootScope.$on('$stateChangeStart',function(){
+				$(window).scrollTop(0);
+			})
 		});
 })();

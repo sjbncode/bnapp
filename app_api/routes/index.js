@@ -5,5 +5,6 @@ var synclogCtrl=require('../controllers/synclog')
 
 router.get('/synclog',synclogCtrl.getSyncLogSummary);
 router.get('/syncErrors',synclogCtrl.getSyncErrors);
+router.post('/SyncErrorByID',synclogCtrl.getSyncErrorByID);
 
 module.exports = router;

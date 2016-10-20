@@ -8,6 +8,7 @@ module.exports.getSyncLogSummary=function(req,res){
 	db.select(q,function(r){		
 		sendJSONresponse(res,200,r);
 	});
+
 }
 
 module.exports.getSyncErrors=function (req,res) {
@@ -19,6 +20,13 @@ module.exports.getSyncErrors=function (req,res) {
 
 module.exports.getSyncErrorByID=function (req,res) {
 	var q="SELECT ID, DataName,Destination,Key1,key2,Key3,Result,EntityXml,PostEntityXml,SyncTimes,CreatedBy,CreatedDttm,UpdatedDttm FROM dbo.IntegrationLog WHERE ID='"+req.body.ID+"'";
+	db.select(q,function(r){		
+		sendJSONresponse(res,200,r);
+	});
+}
+
+module.exports.getDuplicateInvoice=function (req,res) {
+	var q="SELECT InvoiceID,OrderID FROM dbo.FinalInvoiceHeader a WITH(NOLOCK) INNER JOIN dbo.FinalInvoiceDetail b WITH(NOLOCK) ON a.FinalInvoiceID=b.FinalInvoiceID GROUP BY InvoiceID,OrderID HAVING COUNT(DISTINCT a.FinalInvoiceID)>1";
 	db.select(q,function(r){		
 		sendJSONresponse(res,200,r);
 	});

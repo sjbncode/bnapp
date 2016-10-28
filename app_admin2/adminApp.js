@@ -74,6 +74,21 @@
 				params:{"ID":null}
 				
 			})
+			.state('dashboards.monthlyreport', {
+            url: "/monthlyreport",
+            templateUrl: "monitor/monthlyreport.html",
+            // data: { pageTitle: 'Dashboard 3' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            name: 'angles',
+                            files: ['js/plugins/chartJs/angles.js', 'js/plugins/chartJs/Chart.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
 
 		.state('dashboards.dashboard_1', {
 				url: "/dashboard_1",

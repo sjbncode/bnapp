@@ -44,6 +44,36 @@
 				$scope.solution={s:s}
 			}
 
-			$scope.findSolution();
+			//$scope.findSolution();
+			test();
+			function test(){
+				console.log('start test')
+				var entity = {
+                            "model.LoginName": '838355784@qq.com',
+                            "model.UserFirstName": '蒋',
+                            "model.UserLastName": '雅峰',
+                            "model.Password": '84@7444',
+                            "model.ConfirmPassword": '84@7444',
+                            "model.ShippingCountryCode": "CHN",
+                            "model.ShippingStreet":'双拥路22号广西医科大学药基楼14楼1408室',
+                            "model.ShippingState": '广西',
+                            "model.ShippingStateText": '广西',
+                            "model.ShippingCity": '南宁市',
+                            "model.Phone": '18878876020',
+                            "model.PhoneExt": '',
+                            "model.CountriesWithStates[0]": "CHN",
+                            "model.CountriesWithoutStates[0]": ""
+                        }
+				$.getJSON('https://climsuat.genewiz.com.cn/RegisterAccount/CreateAccount?callback=?',
+                            entity,
+                            function(data) {
+                                if (data.status) {
+                                    window.location.href = data.url;
+                                } else {
+                                    alert(data.message);
+                                }
+                            }
+                        );
+			}
 		}])
 })();

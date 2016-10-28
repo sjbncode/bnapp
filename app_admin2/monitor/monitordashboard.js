@@ -2,6 +2,26 @@
 (function() {
 	angular.module('adminApp')
 		.controller('monitordashboard', ['$scope', '$interval', '$http', function($scope, $interval, $http) {
+
+$scope.lineData = {
+				labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+				series: [
+					[12, 9, 7, 8, 5],
+					[2, 1, 3.5, 7, 3],
+					[1, 3, 4, 5, 6]
+				]
+			};
+
+			$scope.test = 'xxxx';
+
+			$scope.lineOptions = {
+				fullWidth: true,
+				chartPadding: {
+					right: 40
+				}
+			};
+
+			
 			$scope.synclog = [];
 			$scope.synclog_exception = 0;
 			$scope.syncErrors = [];
@@ -58,6 +78,14 @@
 					});
 				});
 			};
+
+			function getCustomerMonthlySummary(){
+				$http.post('/api/CustomerMonthlySummary/',{CustomerAccount:'byzhang@basepair.cn'})	
+				.then(function(result) {
+					console.log(JSON.stringify(result));
+				});
+			}
+
 			function getDuplicateInvoice(){
 				$http.get('/api/duplicateInvoice/').then(function(result) {
 					$scope.duplicateInvoice = [];

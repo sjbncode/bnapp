@@ -102,6 +102,20 @@ GROUP BY a.CompanyID,a.CompanyName,a.M
 ORDER BY a.M DESC
 	`;
 	q = formmatSql(q, [req.body.CompanyName]);
+if(req.body.CompanyName==undefined||req.body.CompanyName==''){
+	q=`;WITH pitmp AS( 
+SELECT TotalAmount
+,CONVERT(NVARCHAR(128),YEAR(a.CheckOutDate))+'-'+RIGHT('00'+CONVERT(NVARCHAR(128),MONTH(a.CheckOutDate)),2) AS M 
+FROM dbo.SalesOrder a with(nolock)
+INNER JOIN dbo.CustUserInfo b WITH(NOLOCK) ON a.UserID = b.UserID
+WHERE b.LoginName NOT LIKE '%genewiz%' AND a.IsOrder=1
+)
+SELECT a.M,COUNT(1) AS  orders,SUM(a.TotalAmount)  AS amount
+FROM pitmp a
+GROUP BY a.M
+ORDER BY a.M DESC`;
+
+}
 	console.log(q);
 	db.select(q, function(r) {
 		sendJSONresponse(res, 200, r);

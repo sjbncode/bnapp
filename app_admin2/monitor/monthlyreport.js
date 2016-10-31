@@ -57,7 +57,7 @@
 				return dataList;
 			}
 			function getCompanySummary(cname){
-				cname=cname||'广西南宁宏唐生物科技有限公司'
+				// cname=cname||'广西南宁宏唐生物科技有限公司'
 				$http.post('/api/CompanyMonthlySummary/', {CompanyName:cname})
 				.then(function(result){
 					if(result.data.error)
